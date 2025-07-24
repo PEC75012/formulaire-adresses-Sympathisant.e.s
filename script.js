@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     data["Commentaires"] = formData.get("commentaire") || "";
 
-    fetch('https://script.google.com/macros/s/AKfycbyPwr9idIV6oyLFBeuAglFw5ImZctFJlq2VXBXY7LyUyDW6B2SWN8UlGu2aC2lIqkrQRg/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbwEbT79t3WCfHfshH15-ulVixWHiDdbATcyhTIn1Nao95SW_dCGrmlGrBHy8v93sfSmHQ/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
