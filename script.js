@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let adresses = [];
 
+  // Charger les adresses pour l'autocomplétion
   fetch('adresses.json')
     .then(res => res.json())
     .then(data => adresses = data);
@@ -76,40 +77,25 @@ document.addEventListener("DOMContentLoaded", function () {
     data["ADRESSE COMPLETE (Auto-complétion)"] = formData.get("adresse") || "";
     data["Adresse autre"] = formData.get("adresse_autre") || "";
 
-    // Cases à cocher - "souhaits"
-    data["Participer à des réunions"] = formData.getAll("souhaits[]").includes("Participer à des réunions") ? "Oui" : "";
-    data["Faire du porte à porte"] = formData.getAll("souhaits[]").includes("Faire du porte à porte") ? "Oui" : "";
-    data["Distribuer des documents"] = formData.getAll("souhaits[]").includes("Distribution documents") ? "Oui" : "";
-    data["Boîter des documents"] = formData.getAll("souhaits[]").includes("Boitage documents") ? "Oui" : "";
-    data["Apporter une compétence"] = formData.getAll("souhaits[]").includes("Apporter une compétence") ? "Oui" : "";
+    // Souhaits
+    const souhaits = formData.getAll("souhaits[]");
+    data["Participer à des réunions"] = souhaits.includes("Participer à des réunions") ? "Oui" : "";
+    data["Faire du porte à porte"] = souhaits.includes("Faire du porte à porte") ? "Oui" : "";
+    data["Distribuer des documents"] = souhaits.includes("Distribution documents") ? "Oui" : "";
+    data["Boîter des documents"] = souhaits.includes("Boitage documents") ? "Oui" : "";
+    data["Apporter une compétence"] = souhaits.includes("Apporter une compétence") ? "Oui" : "";
 
-    // Cases à cocher - "intérêts"
-    data["Le logement comme garantie du droit à bien vivre à paris"] =
-      formData.getAll("interets[]").includes("Le logement comme garantie du droit à bien vivre à Paris") ? "Oui" : "";
-
-    data["Une école publique de qualité pour lutter contre les déterminismes sociaux"] =
-      formData.getAll("interets[]").includes("Une école publique de qualité pour lutter contre les déterminismes sociaux") ? "Oui" : "";
-
-    data["Des services publics qui prennent soin de chacune et chacun"] =
-      formData.getAll("interets[]").includes("Des services publics qui prennent soin de chacune et chacun") ? "Oui" : "";
-
-    data["La transformation écologique pour une ville vivable et désirable"] =
-      formData.getAll("interets[]").includes("La transformation écologique pour une ville vivable et désirable") ? "Oui" : "";
-
-    data["Une ville apaisée pour une meilleure qualité de vie au quotidien"] =
-      formData.getAll("interets[]").includes("Une ville apaisée pour une meilleure qualité de vie au quotidien") ? "Oui" : "";
-
-    data["La culture, levier d’émancipation et de partage"] =
-      formData.getAll("interets[]").includes("La culture, levier d’émancipation et de partage") ? "Oui" : "";
-
-    data["Une ville du soin et de la solidarité"] =
-      formData.getAll("interets[]").includes("Une ville du soin et de la solidarité") ? "Oui" : "";
-
-    data["Redonner du souffle au débat démocratique"] =
-      formData.getAll("interets[]").includes("Redonner du souffle au débat démocratique") ? "Oui" : "";
-
-    data["Paris, capitale de l’égalité et de la lutte contre toutes les discriminations"] =
-      formData.getAll("interets[]").includes("Paris, capitale de l’égalité et de la lutte contre toutes les discriminations") ? "Oui" : "";
+    // Centres d'intérêt
+    const interets = formData.getAll("interets[]");
+    data["Le logement comme garantie du droit à bien vivre à paris"] = interets.includes("Le logement comme garantie du droit à bien vivre à Paris") ? "Oui" : "";
+    data["Une école publique de qualité pour lutter contre les déterminismes sociaux"] = interets.includes("Une école publique de qualité pour lutter contre les déterminismes sociaux") ? "Oui" : "";
+    data["Des services publics qui prennent soin de chacune et chacun"] = interets.includes("Des services publics qui prennent soin de chacune et chacun") ? "Oui" : "";
+    data["La transformation écologique pour une ville vivable et désirable"] = interets.includes("La transformation écologique pour une ville vivable et désirable") ? "Oui" : "";
+    data["Une ville apaisée pour une meilleure qualité de vie au quotidien"] = interets.includes("Une ville apaisée pour une meilleure qualité de vie au quotidien") ? "Oui" : "";
+    data["La culture, levier d’émancipation et de partage"] = interets.includes("La culture, levier d’émancipation et de partage") ? "Oui" : "";
+    data["Une ville du soin et de la solidarité"] = interets.includes("Une ville du soin et de la solidarité") ? "Oui" : "";
+    data["Redonner du souffle au débat démocratique"] = interets.includes("Redonner du souffle au débat démocratique") ? "Oui" : "";
+    data["Paris, capitale de l’égalité et de la lutte contre toutes les discriminations"] = interets.includes("Paris, capitale de l’égalité et de la lutte contre toutes les discriminations") ? "Oui" : "";
 
     data["Commentaires"] = formData.get("commentaire") || "";
 
