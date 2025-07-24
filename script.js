@@ -68,7 +68,7 @@ document.getElementById('psForm').addEventListener('submit', function (e) {
   data.interets = [];
   document.querySelectorAll('input[name="interets[]"]:checked').forEach(cb => data.interets.push(cb.value));
 
-  fetch('https://script.google.com/macros/s/AKfycbyPly7WZCqxGOLtdl646l58gtZjsRYAulqNRV60EOi8CNKk-jBHNUpgtLBRNMirf5G-/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbw0r1nRaYFS8V_3zBXZjlQ2NSgSTSZyPvEyo5QllHTJvFGv_y8_ol4bcpTsbL0wR46h/exec', {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
