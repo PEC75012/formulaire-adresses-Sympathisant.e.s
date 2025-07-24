@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   let adresses = [];
 
-  // Charger les adresses JSON pour l’autocomplétion
   fetch('adresses.json')
     .then(res => res.json())
     .then(data => adresses = data);
@@ -9,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const adresseInput = document.getElementById('adresse');
   const suggestionBox = document.getElementById('suggestions');
 
-  // Gestion de l'autocomplétion
   adresseInput.addEventListener('input', function () {
     const value = this.value.toLowerCase();
     suggestionBox.innerHTML = '';
@@ -32,19 +30,16 @@ document.addEventListener("DOMContentLoaded", function () {
     suggestionBox.style.display = matches.length ? 'block' : 'none';
   });
 
-  // Clic extérieur ferme la suggestion
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.autocomplete-wrapper')) {
       suggestionBox.style.display = 'none';
     }
   });
 
-  // Affiche le champ "lieu autre" si besoin
   document.getElementById('lieu_contact').addEventListener('change', function () {
     document.getElementById('lieu_autre').style.display = this.value === 'Autre' ? 'block' : 'none';
   });
 
-  // Affiche ou cache la suite du formulaire
   document.getElementsByName('accepte_info').forEach(radio => {
     radio.addEventListener('change', function () {
       const suite = document.getElementById('suiteForm');
@@ -64,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Soumission du formulaire
   document.getElementById('psForm').addEventListener('submit', function (e) {
     e.preventDefault();
     const form = e.target;
@@ -72,16 +66,54 @@ document.addEventListener("DOMContentLoaded", function () {
     submitBtn.classList.add('loading');
 
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    const data = {};
 
-    // Récupérer les cases à cocher
-    data.souhaits = [];
-    document.querySelectorAll('input[name="souhaits[]"]:checked').forEach(cb => data.souhaits.push(cb.value));
+    data["HORODATAGE"] = new Date().toLocaleString();
+    data["PRENOM"] = formData.get("prenom") || "";
+    data["NOM"] = formData.get("nom") || "";
+    data["E-MAIL"] = formData.get("email") || "";
+    data["TELEPHONE"] = formData.get("telephone") || "";
+    data["ADRESSE COMPLETE (Auto-complétion)"] = formData.get("adresse") || "";
+    data["Adresse autre"] = formData.get("adresse_autre") || "";
 
-    data.interets = [];
-    document.querySelectorAll('input[name="interets[]"]:checked').forEach(cb => data.interets.push(cb.value));
+    // Cases à cocher - "souhaits"
+    data["Participer à des réunions"] = formData.getAll("souhaits[]").includes("Participer à des réunions") ? "Oui" : "";
+    data["Faire du porte à porte"] = formData.getAll("souhaits[]").includes("Faire du porte à porte") ? "Oui" : "";
+    data["Distribuer des documents"] = formData.getAll("souhaits[]").includes("Distribution documents") ? "Oui" : "";
+    data["Boîter des documents"] = formData.getAll("souhaits[]").includes("Boitage documents") ? "Oui" : "";
+    data["Apporter une compétence"] = formData.getAll("souhaits[]").includes("Apporter une compétence") ? "Oui" : "";
 
-    fetch('https://script.google.com/macros/s/AKfycbyPly7WZCqxGOLtdl646l58gtZjsRYAulqNRV60EOi8CNKk-jBHNUpgtLBRNMirf5G-/exec', {
+    // Cases à cocher - "intérêts"
+    data["Le logement comme garantie du droit à bien vivre à paris"] =
+      formData.getAll("interets[]").includes("Le logement comme garantie du droit à bien vivre à Paris") ? "Oui" : "";
+
+    data["Une école publique de qualité pour lutter contre les déterminismes sociaux"] =
+      formData.getAll("interets[]").includes("Une école publique de qualité pour lutter contre les déterminismes sociaux") ? "Oui" : "";
+
+    data["Des services publics qui prennent soin de chacune et chacun"] =
+      formData.getAll("interets[]").includes("Des services publics qui prennent soin de chacune et chacun") ? "Oui" : "";
+
+    data["La transformation écologique pour une ville vivable et désirable"] =
+      formData.getAll("interets[]").includes("La transformation écologique pour une ville vivable et désirable") ? "Oui" : "";
+
+    data["Une ville apaisée pour une meilleure qualité de vie au quotidien"] =
+      formData.getAll("interets[]").includes("Une ville apaisée pour une meilleure qualité de vie au quotidien") ? "Oui" : "";
+
+    data["La culture, levier d’émancipation et de partage"] =
+      formData.getAll("interets[]").includes("La culture, levier d’émancipation et de partage") ? "Oui" : "";
+
+    data["Une ville du soin et de la solidarité"] =
+      formData.getAll("interets[]").includes("Une ville du soin et de la solidarité") ? "Oui" : "";
+
+    data["Redonner du souffle au débat démocratique"] =
+      formData.getAll("interets[]").includes("Redonner du souffle au débat démocratique") ? "Oui" : "";
+
+    data["Paris, capitale de l’égalité et de la lutte contre toutes les discriminations"] =
+      formData.getAll("interets[]").includes("Paris, capitale de l’égalité et de la lutte contre toutes les discriminations") ? "Oui" : "";
+
+    data["Commentaires"] = formData.get("commentaire") || "";
+
+    fetch('https://script.google.com/macros/s/AKfycbzKzs7Dra-S40IsUZRJVYeaZGLVNcnkrRkd8p7C9kZQyYaMI33g7NanClJ0X1EAMBc87Q/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
