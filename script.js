@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   let adresses = [];
 
-  // Charger les adresses pour l'autocomplétion
   fetch('adresses.json')
     .then(res => res.json())
     .then(data => adresses = data);
@@ -65,15 +64,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = e.target;
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.classList.add('loading');
-       
 
     const formData = new FormData(form);
     const data = {};
 
     data["HORODATAGE"] = new Date().toLocaleString();
-    
-    data["Lieu du contact"] = formData.get("lieu_contact") || "";
-    
+    const lieuContact = formData.get("lieu_contact");
+    const lieuAutre = formData.get("lieu_autre") || "";
+    data["Lieu du contact"] = lieuContact === "Autre" && lieuAutre ? lieuAutre : lieuContact || "";
+
     data["PRENOM"] = formData.get("prenom") || "";
     data["NOM"] = formData.get("nom") || "";
     data["E-MAIL"] = formData.get("email") || "";
@@ -81,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
     data["ADRESSE COMPLETE (Auto-complétion)"] = formData.get("adresse") || "";
     data["Adresse autre"] = formData.get("adresse_autre") || "";
 
-    // Souhaits
     const souhaits = formData.getAll("souhaits[]");
     data["Participer à des réunions"] = souhaits.includes("Participer à des réunions") ? "Oui" : "";
     data["Faire du porte à porte"] = souhaits.includes("Faire du porte à porte") ? "Oui" : "";
@@ -89,16 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
     data["Boîter des documents"] = souhaits.includes("Boitage documents") ? "Oui" : "";
     data["Apporter une compétence"] = souhaits.includes("Apporter une compétence") ? "Oui" : "";
 
-    // Centres d'intérêt
     const interets = formData.getAll("interets[]");
     data["Le logement comme garantie du droit à bien vivre à paris"] = interets.includes("Le logement comme garantie du droit à bien vivre à Paris") ? "Oui" : "";
     data["Une école publique de qualité pour lutter contre les déterminismes sociaux"] = interets.includes("Une école publique de qualité pour lutter contre les déterminismes sociaux") ? "Oui" : "";
     data["Des services publics qui prennent soin de chacune et chacun"] = interets.includes("Des services publics qui prennent soin de chacune et chacun") ? "Oui" : "";
     data["La transformation écologique pour une ville vivable et désirable"] = interets.includes("La transformation écologique pour une ville vivable et désirable") ? "Oui" : "";
     data["Une ville apaisée pour une meilleure qualité de vie au quotidien"] = interets.includes("Une ville apaisée pour une meilleure qualité de vie au quotidien") ? "Oui" : "";
-        
-    data["Une capitale ouverte sur sa métropole, motrice de l’intérêt général"] = interets.includes("Une capitale ouverte sur sa métropole, motrice de l’intérêt général") ? "Oui" : "";
-
     data["La culture, levier d’émancipation et de partage"] = interets.includes("La culture, levier d’émancipation et de partage") ? "Oui" : "";
     data["Une ville du soin et de la solidarité"] = interets.includes("Une ville du soin et de la solidarité") ? "Oui" : "";
     data["Redonner du souffle au débat démocratique"] = interets.includes("Redonner du souffle au débat démocratique") ? "Oui" : "";
@@ -106,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     data["Commentaires"] = formData.get("commentaire") || "";
 
-    fetch('https://script.google.com/macros/s/AKfycbwEbT79t3WCfHfshH15-ulVixWHiDdbATcyhTIn1Nao95SW_dCGrmlGrBHy8v93sfSmHQ/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbzKzs7Dra-S40IsUZRJVYeaZGLVNcnkrRkd8p7C9kZQyYaMI33g7NanClJ0X1EAMBc87Q/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
