@@ -1,6 +1,7 @@
-(function() {
+document.addEventListener("DOMContentLoaded", function () {
   let adresses = [];
 
+  // Charger les adresses JSON pour l’autocomplétion
   fetch('adresses.json')
     .then(res => res.json())
     .then(data => adresses = data);
@@ -8,6 +9,7 @@
   const adresseInput = document.getElementById('adresse');
   const suggestionBox = document.getElementById('suggestions');
 
+  // Gestion de l'autocomplétion
   adresseInput.addEventListener('input', function () {
     const value = this.value.toLowerCase();
     suggestionBox.innerHTML = '';
@@ -30,16 +32,19 @@
     suggestionBox.style.display = matches.length ? 'block' : 'none';
   });
 
+  // Clic extérieur ferme la suggestion
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.autocomplete-wrapper')) {
       suggestionBox.style.display = 'none';
     }
   });
 
+  // Affiche le champ "lieu autre" si besoin
   document.getElementById('lieu_contact').addEventListener('change', function () {
     document.getElementById('lieu_autre').style.display = this.value === 'Autre' ? 'block' : 'none';
   });
 
+  // Affiche ou cache la suite du formulaire
   document.getElementsByName('accepte_info').forEach(radio => {
     radio.addEventListener('change', function () {
       const suite = document.getElementById('suiteForm');
@@ -59,6 +64,7 @@
     });
   });
 
+  // Soumission du formulaire
   document.getElementById('psForm').addEventListener('submit', function (e) {
     e.preventDefault();
     const form = e.target;
@@ -68,8 +74,10 @@
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    // Récupérer les cases à cocher
     data.souhaits = [];
     document.querySelectorAll('input[name="souhaits[]"]:checked').forEach(cb => data.souhaits.push(cb.value));
+
     data.interets = [];
     document.querySelectorAll('input[name="interets[]"]:checked').forEach(cb => data.interets.push(cb.value));
 
@@ -86,4 +94,4 @@
       document.getElementById('suiteForm').style.display = 'none';
     });
   });
-})();
+});
