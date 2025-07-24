@@ -71,7 +71,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const data = {};
 
     data["HORODATAGE"] = new Date().toLocaleString();
+    
     data["Lieu du contact"] = formData.get("lieu_contact") || "";
+    
     data["PRENOM"] = formData.get("prenom") || "";
     data["NOM"] = formData.get("nom") || "";
     data["E-MAIL"] = formData.get("email") || "";
