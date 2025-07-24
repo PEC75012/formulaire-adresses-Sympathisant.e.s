@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     data.interets = [];
     document.querySelectorAll('input[name="interets[]"]:checked').forEach(cb => data.interets.push(cb.value));
 
-    fetch('https://script.google.com/macros/s/AKfycbzKzs7Dra-S40IsUZRJVYeaZGLVNcnkrRkd8p7C9kZQyYaMI33g7NanClJ0X1EAMBc87Q/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbyPly7WZCqxGOLtdl646l58gtZjsRYAulqNRV60EOi8CNKk-jBHNUpgtLBRNMirf5G-/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
