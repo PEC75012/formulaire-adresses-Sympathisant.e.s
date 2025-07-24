@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const data = {};
 
     data["HORODATAGE"] = new Date().toLocaleString();
+    data["Lieu du contact"] = formData.get("lieu_contact") || "";
     data["PRENOM"] = formData.get("prenom") || "";
     data["NOM"] = formData.get("nom") || "";
     data["E-MAIL"] = formData.get("email") || "";
@@ -93,7 +94,8 @@ document.addEventListener("DOMContentLoaded", function () {
     data["Des services publics qui prennent soin de chacune et chacun"] = interets.includes("Des services publics qui prennent soin de chacune et chacun") ? "Oui" : "";
     data["La transformation écologique pour une ville vivable et désirable"] = interets.includes("La transformation écologique pour une ville vivable et désirable") ? "Oui" : "";
     data["Une ville apaisée pour une meilleure qualité de vie au quotidien"] = interets.includes("Une ville apaisée pour une meilleure qualité de vie au quotidien") ? "Oui" : "";
-        data["Une capitale ouverte sur sa métropole, motrice de l’intérêt général"] = interets.includes("Une capitale ouverte sur sa métropole, motrice de l’intérêt général") ? "Oui" : "";
+        
+    data["Une capitale ouverte sur sa métropole, motrice de l’intérêt général"] = interets.includes("Une capitale ouverte sur sa métropole, motrice de l’intérêt général") ? "Oui" : "";
 
     data["La culture, levier d’émancipation et de partage"] = interets.includes("La culture, levier d’émancipation et de partage") ? "Oui" : "";
     data["Une ville du soin et de la solidarité"] = interets.includes("Une ville du soin et de la solidarité") ? "Oui" : "";
