@@ -1,19 +1,26 @@
+
 function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const feuille = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const data = JSON.parse(e.postData.contents);
 
   const email = data.email;
-  const existing = sheet.getDataRange().getValues().some(row => row[2] === email);
-  if (existing) return ContentService.createTextOutput("Email déjà utilisé");
+  const deja = feuille.getDataRange().getValues().some(row => row[4] === email);
+  if (deja) return ContentService.createTextOutput("Doublon");
 
-  sheet.appendRow([
+  feuille.appendRow([
     new Date(),
-    data.prenom,
+    data.accepte_info,
+    data.date_contact || '',
+    data.lieu_contact,
+    data.lieu_autre || '',
     data.nom,
+    data.prenom,
     data.email,
-    data.telephone,
     data.adresse,
-    data.interets
+    data.adresse_autre || '',
+    data.souhaits ? data.souhaits.join(', ') : '',
+    data.interets ? data.interets.join(', ') : '',
+    data.commentaire || ''
   ]);
   return ContentService.createTextOutput("OK");
 }
