@@ -65,6 +65,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = e.target;
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.classList.add('loading');
+       
+    // Contact
+    const lieuContact = formData.get("lieu_contact");
+    const lieuAutre = formData.get("lieu_autre") || "";
+    data["LIEU DU CONTACT"] = lieuContact === "Autre" && lieuAutre ? lieuAutre : lieuContact || "";
 
     const formData = new FormData(form);
     const data = {};
