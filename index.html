@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Formulaire d'inscription</h1>
+    <form id="myForm">
+      <input type="text" name="prenom" placeholder="Prénom" required>
+      <input type="text" name="nom" placeholder="Nom" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="telephone" placeholder="Téléphone Portable" required>
+
+      <div class="autocomplete-wrapper">
+        <input type="text" id="adresse" name="adresse" placeholder="Adresse complète" required autocomplete="off">
+        <div id="suggestions" class="suggestions" style="display: none;"></div>
+      </div>
+
+      <fieldset>
+        <legend>Centres d’intérêt</legend>
+        <label><input type="checkbox" name="interets[]" value="Participer à des réunions">Tracter sur les marchés</label>
+        <label><input type="checkbox" name="interets[]" value="Faire du porte à porte">Tracter devant les écoles</label>
+        <label><input type="checkbox" name="interets[]" value="Distribuer des documents (programmes, tracs…)">Tracter aux stations de métro</label>
+        <label><input type="checkbox" name="interets[]" value="Boîtage de documents (programmes, tracs…)">Participer aux réunions de la section PS12</label>
+        <label><input type="checkbox" name="interets[]" value="Apporter une compétence">Proposer des sujets de réunion</label>
+        <label><input type="checkbox" name="interets[]" value="Participer à la création de documents de campagne">Participer à la création de documents de campagne</label>
+      </fieldset>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
