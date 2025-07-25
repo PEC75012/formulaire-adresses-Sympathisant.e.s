@@ -36,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Gérer affichage de la zone "Autre"
+  // Affichage champ "Autre" si sélectionné pour Lieu du contact
   document.getElementById('lieu_contact').addEventListener('change', function () {
     const autreInput = document.getElementById('lieu_autre_container');
     autreInput.style.display = this.value === 'Autre' ? 'block' : 'none';
   });
 
-  // Gérer affichage du formulaire selon réponse Oui / Non
+  // Affichage ou masquage de la suite du formulaire selon réponse Oui/Non
   document.getElementsByName('accepte_info').forEach(radio => {
     radio.addEventListener('change', function () {
       const suite = document.getElementById('suiteForm');
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Soumission du formulaire
+  // Envoi du formulaire
   document.getElementById('psForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const data = {};
 
     data["HORODATAGE"] = new Date().toLocaleString();
+
     const lieuContact = formData.get("lieu_contact");
     const lieuAutre = formData.get("lieu_autre") || "";
     data["Lieu du contact"] = lieuContact === "Autre" && lieuAutre ? lieuAutre : lieuContact || "";
