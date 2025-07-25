@@ -59,11 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  document.getElementById('psForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const form = e.target;
-    const submitBtn = form.querySelector('button[type="submit"]');
-    submitBtn.classList.add('loading');
+  document.getElementById('lieu_contact').addEventListener('change', function () {
+  const autreInput = document.getElementById('lieu_autre_container');
+  autreInput.style.display = this.value === 'Autre' ? 'block' : 'none';
+});
+
 
     const formData = new FormData(form);
     const data = {};
