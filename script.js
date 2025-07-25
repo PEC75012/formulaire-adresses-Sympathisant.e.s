@@ -1,4 +1,4 @@
-tdocument.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   let adresses = [];
 
   fetch('adresses.json')
@@ -35,11 +35,14 @@ tdocument.addEventListener("DOMContentLoaded", function () {
       suggestionBox.style.display = 'none';
     }
   });
-//Changemement//
+
+  // Gérer affichage de la zone "Autre"
   document.getElementById('lieu_contact').addEventListener('change', function () {
-    document.getElementById('lieu_autre').style.display = this.value === 'Autre' ? 'block' : 'none';
+    const autreInput = document.getElementById('lieu_autre_container');
+    autreInput.style.display = this.value === 'Autre' ? 'block' : 'none';
   });
 
+  // Gérer affichage du formulaire selon réponse Oui / Non
   document.getElementsByName('accepte_info').forEach(radio => {
     radio.addEventListener('change', function () {
       const suite = document.getElementById('suiteForm');
@@ -59,11 +62,13 @@ tdocument.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  document.getElementById('lieu_contact').addEventListener('change', function () {
-  const autreInput = document.getElementById('lieu_autre_container');
-  autreInput.style.display = this.value === 'Autre' ? 'block' : 'none';
-});
+  // Soumission du formulaire
+  document.getElementById('psForm').addEventListener('submit', function (e) {
+    e.preventDefault();
 
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.classList.add('loading');
 
     const formData = new FormData(form);
     const data = {};
@@ -94,9 +99,7 @@ tdocument.addEventListener("DOMContentLoaded", function () {
     data["La transformation écologique pour une ville vivable et désirable"] = interets.includes("La transformation écologique pour une ville vivable et désirable") ? "Oui" : "";
     data["Une ville apaisée pour une meilleure qualité de vie au quotidien"] = interets.includes("Une ville apaisée pour une meilleure qualité de vie au quotidien") ? "Oui" : "";
     data["La culture, levier d’émancipation et de partage"] = interets.includes("La culture, levier d’émancipation et de partage") ? "Oui" : "";
-    data["Une capitale ouverte sur sa métropole, motrice de l’intérêt général"] =
-  interets.includes("Une capitale ouverte sur sa métropole, motrice de l’intérêt général") ? "Oui" : "";
-
+    data["Une capitale ouverte sur sa métropole, motrice de l’intérêt général"] = interets.includes("Une capitale ouverte sur sa métropole, motrice de l’intérêt général") ? "Oui" : "";
     data["Une ville du soin et de la solidarité"] = interets.includes("Une ville du soin et de la solidarité") ? "Oui" : "";
     data["Redonner du souffle au débat démocratique"] = interets.includes("Redonner du souffle au débat démocratique") ? "Oui" : "";
     data["Paris, capitale de l’égalité et de la lutte contre toutes les discriminations"] = interets.includes("Paris, capitale de l’égalité et de la lutte contre toutes les discriminations") ? "Oui" : "";
