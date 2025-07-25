@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+tdocument.addEventListener("DOMContentLoaded", function () {
   let adresses = [];
 
   fetch('adresses.json')
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       suggestionBox.style.display = 'none';
     }
   });
-
+//Changemement//
   document.getElementById('lieu_contact').addEventListener('change', function () {
     document.getElementById('lieu_autre').style.display = this.value === 'Autre' ? 'block' : 'none';
   });
