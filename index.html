@@ -20,16 +20,19 @@
         <input type="text" id="date_contact" name="date_contact" readonly hidden />
 
         <label for="lieu_contact">Lieu du contact</label>
-        <select id="lieu_contact" name="lieu_contact">
-          <option value="">-- Choisir --</option>
-          <option value="Marché">Marché</option>
-          <option value="Métro">Métro</option>
-          <option value="Ecole">École</option>
-          <option value="Supermarché">Supermarché</option>
-          <option value="Autre">Autre</option>
-        </select>
+        <select id="lieu_contact" name="lieu_contact" required>
+  <option value="">-- Choisir --</option>
+  <option value="Marché">Marché</option>
+  <option value="Métro">Métro</option>
+  <option value="École">École</option>
+  <option value="Supermarché">Supermarché</option>
+  <option value="Autre">Autre (à préciser)</option>
+</select>
 
-        <input type="text" id="lieu_autre" name="lieu_autre" placeholder="Précisez le lieu..." style="display:none;" />
+<div id="lieu_autre_container" style="display: none;">
+  <input type="text" id="lieu_autre" name="lieu_autre" placeholder="Précisez le lieu de contact..." />
+</div>
+
 
         <input type="text" name="nom" placeholder="Votre Nom*" required />
         <input type="text" name="prenom" placeholder="Votre Prénom*" required />
