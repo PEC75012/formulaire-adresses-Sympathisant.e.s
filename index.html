@@ -49,8 +49,19 @@
         <input type="text" name="adresse_autre" placeholder="Complément d'adresse (optionnel)" />
         
         // Rajout Quartier
-        <input type="text" name="quartier" placeholder="Quartier (si adresse non remplie)" />
-        // Rajout Quartier
+        <label for="quartier">QUARTIER *</label>
+        <select id="quartier" name="quartier" required>
+          <option value="">-- Choisir --</option>
+          <option value="Aligre Gare de Lyon">Aligre Gare de Lyon</option>
+          <option value="Jardin de Reuilly">Jardin de Reuilly</option>
+          <option value="Nation Picpus">Nation Picpus</option>
+          <option value="Bel-Air Nord">Bel-Air Nord</option>
+          <option value="Bel-Air Sud">Bel-Air Sud</option>
+          <option value="Vallée de Fécamp">Vallée de Fécamp</option>
+          <option value="Bercy">Bercy</option>
+
+
+        </select>
         
         <fieldset>
           <legend>Je souhaite :</legend>
