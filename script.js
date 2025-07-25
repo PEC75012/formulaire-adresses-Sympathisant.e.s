@@ -44,23 +44,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Affichage ou masquage de la suite du formulaire selon réponse Oui/Non
   document.getElementsByName('accepte_info').forEach(radio => {
-    radio.addEventListener('change', function () {
-      const suite = document.getElementById('suiteForm');
-      const confirmation = document.getElementById('messageConfirmation');
-      const submitBtn = document.querySelector('button[type="submit"]');
-      if (this.value === 'Oui') {
-        suite.style.display = 'block';
-        confirmation.style.display = 'none';
-        submitBtn.style.display = 'inline-block';
-        document.getElementById('date_contact').value = new Date().toLocaleString();
-      } else {
-        suite.style.display = 'none';
-        confirmation.innerText = "Nous vous remercions de votre collaboration, à bientôt peut-être !";
-        confirmation.style.display = 'block';
-        submitBtn.style.display = 'none';
-      }
-    });
+  radio.addEventListener('change', function () {
+    const suite = document.getElementById('suiteForm');
+    const confirmation = document.getElementById('messageConfirmation');
+    const submitBtn = document.querySelector('button[type="submit"]');
+
+    if (this.value === 'Oui') {
+      suite.style.display = 'block';
+      confirmation.style.display = 'none';
+      submitBtn.style.display = 'inline-block';
+      document.getElementById('date_contact').value = new Date().toLocaleString();
+    } else {
+      suite.style.display = 'none';
+      confirmation.innerText = "Nous vous remercions de votre collaboration, à bientôt peut-être !";
+      confirmation.style.display = 'block';
+      submitBtn.style.display = 'none';
+    }
   });
+});
 
   // Envoi du formulaire
   document.getElementById('psForm').addEventListener('submit', function (e) {
