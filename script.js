@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
     data["ADRESSE COMPLETE (Auto-complétion)"] = formData.get("adresse") || "";
     data["Adresse autre"] = formData.get("adresse_autre") || "";
 
-    //Rajout Quartier//
-    data["Quartier"] = formData.get("quartier") || "";
+    //Rajout Quartier
+    data["Quartier (si adresse non remplie)"] = formData.get("quartier") || "";
 
     
     const souhaits = formData.getAll("souhaits[]");
